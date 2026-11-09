@@ -248,7 +248,7 @@
     }
   });
 
-  // Generator link tamu
+ // Generator link tamu
   const adminButton = document.createElement("button");
   adminButton.className = "admin-generator";
   adminButton.type = "button";
