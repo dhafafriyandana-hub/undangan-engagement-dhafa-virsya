@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f0ec">
+  <meta name="description" content="Undangan digital spesial untuk hari pertunangan Dhafa & Virsya.">
+  <title>Engagement Invitation | Dhafa & Virsya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <canvas id="petals" aria-hidden="true"></canvas>
+  <audio id="backgroundMusic" loop preload="none"></audio>
+  <button class="music-toggle" id="musicToggle" aria-label="Putar musik">
+    <span id="musicIcon">♫</span><span id="musicLabel">Putar Musik</span>
+  </button>
+
+  <main>
+    <section class="cover" id="cover">
+      <div class="cover-shade"></div>
+      <div class="cover-inner reveal">
+        <p class="eyebrow" id="eventLabel">THE ENGAGEMENT CELEBRATION</p>
+        <div class="cover-photo-frame"><img id="coverPhoto" src="assets/images/cover.jpg" alt="Foto pasangan"></div>
+        <p class="small-script">Together with our families</p>
+        <h1 class="couple-name"><span id="partnerOneCover">Dhafa</span><i>&</i><span id="partnerTwoCover">Virsya</span></h1>
+        <p class="cover-date" id="coverDate">Sabtu, 12 Desember 2026</p>
+        <div class="guest-box">
+          <span>Kepada Yth.</span>
+          <strong id="guestName">Tamu Undangan</strong>
+          <small>Dengan penuh sukacita, kami mengundang Anda untuk hadir di hari pertunangan kami.</small>
+        </div>
+        <button class="primary-btn" id="openInvitation">✉ Buka Undangan</button>
+        <p class="scroll-hint">Gulir untuk melihat undangan <span>↓</span></p>
+      </div>
+    </section>
+
+    <section class="intro section reveal" id="intro">
+      <p class="small-script">A beautiful beginning</p>
+      <h2>Assalamu’alaikum<br><em>Warahmatullahi Wabarakatuh</em></h2>
+      <p class="section-copy" id="openingText">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan acara istimewa dan mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan doa restu.</p>
+      <div class="ornament">❦</div>
+      <p class="verse" id="verseText">“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”</p>
+      <small class="verse-ref">QS. Ar-Rum: 21</small>
+    </section>
+
+    <section class="couple-section section" id="couple">
+      <div class="section-heading reveal">
+        <p class="small-script">The lovely couple</p><h2>Memperkenalkan</h2><p>Dua hati, satu cerita, dan doa yang sama.</p>
+      </div>
+      <div class="profiles">
+        <article class="profile-card reveal">
+          <div class="portrait"><img id="partnerOnePhoto" src="assets/images/pria.jpg" alt="Foto calon pasangan pertama"></div>
+          <h3 id="partnerOneName">Dhafa Fryandana, S.Kom.</h3>
+          <span class="role">CALON MEMPELAI PRIA</span>
+          <p id="partnerOneParents">Putra dari Bapak ... dan Ibu ...</p>
+        </article>
+        <div class="ampersand reveal">♡</div>
+        <article class="profile-card reveal">
+          <div class="portrait"><img id="partnerTwoPhoto" src="assets/images/wanita.jpg" alt="Foto calon pasangan kedua"></div>
+          <h3 id="partnerTwoName">Virsya Ainan Mustamu, S.Li.</h3>
+          <span class="role">CALON MEMPELAI WANITA</span>
+          <p id="partnerTwoParents">Putri dari Bapak ... dan Ibu ...</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="event-section section" id="event">
+      <div class="event-card reveal">
+        <p class="small-script">Save the date</p><h2>Detail Engagement</h2>
+        <p class="muted">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir.</p>
+        <div class="countdown" id="countdown">
+          <div><strong id="days">00</strong><span>Hari</span></div>
+          <div><strong id="hours">00</strong><span>Jam</span></div>
+          <div><strong id="minutes">00</strong><span>Menit</span></div>
+          <div><strong id="seconds">00</strong><span>Detik</span></div>
+        </div>
+        <div class="event-details">
+          <div class="detail"><span class="detail-icon">♡</span><div><h3 id="eventName">Prosesi Lamaran / Prosesi Pertunangan</h3><p id="eventDate">Sabtu, 12 Desember 2026</p><p id="eventTime">09.00 WIB – 12.00 WIB</p></div></div>
+          <div class="detail"><span class="detail-icon">⌖</span><div><h3 id="venueName">Warung Zamzam Halim Raya</h3><p id="venueAddress">Alamat lengkap lokasi acara</p></div></div>
+        </div>
+        <p class="location-note" id="locationNote"></p>
+        <div class="map-wrap"><iframe id="mapFrame" title="Peta lokasi acara engagement" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+        <a class="outline-btn" id="mapLink" target="_blank" rel="noopener">Lihat Petunjuk Arah ↗</a>
+      </div>
+    </section>
+
+    <section class="guidelines-section section">
+      <div class="guidelines-card reveal">
+        <p class="small-script">Kindly Reminder</p><h2>Mohon Perhatian</h2>
+        <p class="guidelines-intro">Demi kenyamanan bersama dan kelancaran acara, kami memohon kesediaan para tamu untuk memperhatikan beberapa ketentuan berikut:</p>
+        <div class="guideline-item"><span class="guideline-icon">♡</span><div><h3>No Outside Food & Beverages</h3><p>Mohon untuk tidak membawa makanan dan minuman dari luar ke area acara. Terima kasih atas pengertiannya.</p></div></div>
+        <div class="guideline-item"><span class="guideline-icon">♡</span><div><h3>No Plus One</h3><p>Undangan ini berlaku khusus untuk nama yang tercantum. Mohon tidak membawa pendamping atau tamu tambahan di luar jumlah undangan yang telah ditentukan.</p></div></div>
+        <div class="guidelines-footer">Terima kasih atas perhatian dan pengertiannya. Sampai bertemu di hari istimewa kami.</div>
+      </div>
+    </section>
+
+    <section class="dresscode-section section" id="dresscode">
+      <div class="dresscode-card reveal">
+        <p class="small-script">A Touch of Elegance</p><h2>Dress Code</h2>
+        <p class="dresscode-intro">Untuk menciptakan suasana yang harmonis dan indah di hari istimewa kami, kami mengundang para tamu untuk mengenakan busana dengan pilihan warna pastel seperti pada inspirasi berikut.</p>
+        <div class="dresscode-image"><img src="assets/images/dresscode.jpg" alt="Inspirasi dress code engagement warna pastel"></div>
+        <h3 class="dresscode-subtitle">Color Palette</h3>
+        <div class="dresscode-colors">
+          <div class="color-item"><span style="background:#E8C0B9"></span><small>Dusty Pink</small></div>
+          <div class="color-item"><span style="background:#C8A8C5"></span><small>Mauve</small></div>
+          <div class="color-item"><span style="background:#D2BCE5"></span><small>Lavender</small></div>
+          <div class="color-item"><span style="background:#F1E8D8"></span><small>Cream</small></div>
+          <div class="color-item"><span style="background:#A9C3DE"></span><small>Baby Blue</small></div>
+          <div class="color-item"><span style="background:#B7BBA7"></span><small>Sage</small></div>
+        </div>
+        <div class="dresscode-guidelines">
+          <div><strong>For Ladies</strong><p>Dress panjang atau gamis dengan warna pastel. Hijab menyesuaikan warna busana.</p></div>
+          <div><strong>For Gentlemen</strong><p>Kemeja lengan panjang warna pastel dipadukan dengan celana bahan beige atau khaki.</p></div>
+        </div>
+        <p class="dresscode-note">Kindly avoid overly bright colors and choose soft pastel tones.</p>
+        <p class="dresscode-thanks">Thank you for dressing beautifully with us ♡</p>
+      </div>
+    </section>
+
+    <section class="gallery-section section" id="gallery">
+      <div class="section-heading reveal"><p class="small-script">Kenangan Manis</p><h2>Galeri Foto</h2><p>Beberapa momen indah dalam perjalanan cerita kami.</p></div>
+      <div class="gallery" id="galleryGrid"></div>
+    </section>
+
+    <section class="rsvp-section section" id="rsvp">
+      <div class="rsvp-card reveal">
+        <p class="small-script">We are waiting for you</p><h2>RSVP & Wishes</h2>
+        <p class="muted">Kehadiran dan doa restu Anda merupakan kebahagiaan bagi kami. Silakan isi konfirmasi dan berikan doa terbaik untuk Dhafa & Virsya.</p>
+        <form id="rsvpForm">
+          <label for="rsvpName">Nama Lengkap<input type="text" id="rsvpName" required placeholder="Masukkan nama Anda"></label>
+          <label for="rsvpStatus">Konfirmasi Kehadiran<select id="rsvpStatus" required><option value="Hadir">Ya, Saya Akan Hadir</option><option value="Belum dapat memastikan">Belum dapat memastikan</option><option value="Berhalangan hadir">Maaf, Tidak Bisa Hadir</option></select></label>
+          <label for="rsvpMessage">Pesan & Doa Restu<textarea id="rsvpMessage" rows="4" required placeholder="Tuliskan ucapan dan doa terbaik untuk Dhafa & Virsya..."></textarea></label>
+          <button class="primary-btn full" type="submit" id="rsvpSubmit">♡ Kirim Ucapan</button>
+        </form>
+        <p class="form-note">Ucapan akan ditampilkan di Buku Tamu pada browser yang digunakan dan konfirmasi dikirim melalui WhatsApp.</p>
+      </div>
+      <div class="guestbook-card reveal">
+        <p class="small-script">With Love & Prayers</p><h2>Buku Tamu</h2>
+        <p class="muted">Kumpulan doa dan ucapan hangat dari keluarga, sahabat, dan kerabat.</p>
+        <div class="guestbook-header"><span id="wishCount">0 Ucapan</span></div>
+        <div class="guestbook-list" id="wishList" aria-live="polite"><div class="empty-wishes">Belum ada ucapan. Jadilah yang pertama memberikan doa terbaik!</div></div>
+        <div class="guestbook-footer"><p>Thank You for Your Lovely Wishes ♡</p></div>
+      </div>
+    </section>
+
+   <section class="gift-section section" id="thanks">
+      <div class="gift-card reveal">
+        <p class="small-script">With Love & Gratitude</p>
+        <h2>Terima Kasih</h2>
+        <p class="muted">
+          Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu bagi langkah awal perjalanan kami.
+        </p>
+        <div class="thanks-quote">
+          <p>“Semoga Allah SWT menyatukan dua hati dalam kebaikan, merestui setiap niat baik, dan melimpahkan kebahagiaan hingga hari istimewa nanti.”</p>
+        </div>
+        <p class="thanks-signature">Sampai jumpa di hari bahagia kami ♡</p>
+        <p class="couple-signature"><strong>Dhafa & Virsya</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="ornament">❦</div><h2 class="footer-names" id="footerNames">Dhafa & Virsya</h2>
+    <p>Terima kasih atas doa dan kehadiran Anda.</p><small>Made with ♡</small>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

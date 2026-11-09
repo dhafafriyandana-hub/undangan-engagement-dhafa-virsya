@@ -1,0 +1,1 @@
+Letakkan file cover.jpg, pria.jpg, wanita.jpg, dresscode.jpg, dan galeri-1.jpg sampai galeri-6.jpg di folder ini.
