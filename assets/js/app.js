@@ -248,56 +248,58 @@
     }
   });
 
- // Generator link tamu
-  const adminButton = document.createElement("button");
-  adminButton.className = "admin-generator";
-  adminButton.type = "button";
-  adminButton.textContent = "✧ Buat Link Tamu";
-  document.body.appendChild(adminButton);
+ // Generator link tamu (Hanya muncul jika URL mengandung ?admin=true)
+  if (params.get("admin") === "true") {
+    const adminButton = document.createElement("button");
+    adminButton.className = "admin-generator";
+    adminButton.type = "button";
+    adminButton.textContent = "✧ Buat Link Tamu";
+    document.body.appendChild(adminButton);
 
-  adminButton.addEventListener("click", () => {
-    const name = prompt("Masukkan nama tamu:");
-    if (!name?.trim()) return;
-    const url = new URL(location.href);
-    url.searchParams.set("to", name.trim());
-    const message = `Assalamu'alaikum ${name.trim()}, kami mengundang Anda ke acara ${one.firstName || ""} & ${two.firstName || ""}. Detail undangan: ${url.href}`;
-    const phone = (prompt("Nomor WhatsApp tamu (opsional, format 628xxx):") || "").replace(/\D/g, "");
-    const wa = phone
-      ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
-      : `https://wa.me/?text=${encodeURIComponent(message)}`;
+    adminButton.addEventListener("click", () => {
+      const name = prompt("Masukkan nama tamu:");
+      if (!name?.trim()) return;
+      const url = new URL(location.href);
+      url.searchParams.delete("admin");
+      url.searchParams.set("to", name.trim());
+      const message = `Assalamu'alaikum ${name.trim()}, kami mengundang Anda ke acara ${one.firstName || ""} & ${two.firstName || ""}. Detail undangan: ${url.href}`;
+      const phone = (prompt("Nomor WhatsApp tamu (opsional, format 628xxx):") || "").replace(/\D/g, "");
+      const wa = phone
+        ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+        : `https://wa.me/?text=${encodeURIComponent(message)}`;
 
-    const box = document.createElement("div");
-    box.className = "generator-result";
-    const title = document.createElement("strong");
-    title.textContent = `Link undangan untuk ${name.trim()}`;
-    const input = document.createElement("input");
-    input.readOnly = true;
-    input.value = url.href;
-    const copy = document.createElement("button");
-    copy.type = "button";
-    copy.textContent = "Salin Link";
-    copy.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(url.href);
-        copy.textContent = "Tersalin ✓";
-      } catch {
-        input.select();
-        alert("Silakan salin link secara manual.");
-      }
+      const box = document.createElement("div");
+      box.className = "generator-result";
+      const title = document.createElement("strong");
+      title.textContent = `Link undangan untuk ${name.trim()}`;
+      const input = document.createElement("input");
+      input.readOnly = true;
+      input.value = url.href;
+      const copy = document.createElement("button");
+      copy.type = "button";
+      copy.textContent = "Salin Link";
+      copy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(url.href);
+          copy.textContent = "Tersalin ✓";
+        } catch {
+          input.select();
+          alert("Silakan salin link secara manual.");
+        }
+      });
+      const send = document.createElement("a");
+      send.href = wa;
+      send.target = "_blank";
+      send.rel = "noopener";
+      send.textContent = "Buka WhatsApp";
+      const close = document.createElement("button");
+      close.type = "button";
+      close.textContent = "Tutup";
+      close.addEventListener("click", () => box.remove());
+      box.append(title, input, copy, send, close);
+      document.body.appendChild(box);
     });
-    const send = document.createElement("a");
-    send.href = wa;
-    send.target = "_blank";
-    send.rel = "noopener";
-    send.textContent = "Buka WhatsApp";
-    const close = document.createElement("button");
-    close.type = "button";
-    close.textContent = "Tutup";
-    close.addEventListener("click", () => box.remove());
-    box.append(title, input, copy, send, close);
-    document.body.appendChild(box);
-  });
-
+  }
   // Reveal on scroll
   const revealElements = document.querySelectorAll(".reveal, .profile-card");
   if ("IntersectionObserver" in window) {
