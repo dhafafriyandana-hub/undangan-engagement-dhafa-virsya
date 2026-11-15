@@ -20,8 +20,8 @@ window.INVITATION = {
     coverPhoto: "assets/images/cover.jpg"
   },
   text: {
-    opening: "Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan acara istimewa dan mengundang Bapak/Ibu/Saudara/i untuk hadir serta memberikan doa restu.",
-    verse: "“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”"
+    opening: ​"Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu pada acara Prosesi Lamaran & Pertunangan kami, Dhafa & Virsya, sebagai ikhtiar awal menyatukan dua keluarga besar menuju jenjang pernikahan yang sakinah, mawaddah, warahmah.",
+    verse: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan-pasangan untukmu...”
   },
   event: {
     name: "Prosesi Lamaran / Prosesi Pertunangan",
