@@ -156,3 +156,38 @@ button,a{-webkit-tap-highlight-color:transparent}
   color: var(--accent);
   margin-top: 5px;
 }
+/* === PENGATURAN KUNCI SAMPUL (COVER GATE) === */
+body.locked {
+  overflow: hidden;
+  height: 100svh;
+}
+
+body.locked .music-toggle {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow-y: auto;
+  transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.85s ease;
+}
+
+.cover.is-opened {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.invitation-content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease 0.2s;
+}
+
+.invitation-content.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
