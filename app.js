@@ -15,6 +15,12 @@
     }
   };
 
+  // Pastikan halaman selalu mulai dari posisi paling atas saat dimuat ulang
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+  window.scrollTo(0, 0);
+
   const one = cfg.couple?.one || {};
   const two = cfg.couple?.two || {};
   const event = cfg.event || {};
@@ -124,10 +130,15 @@
   countdown();
   setInterval(countdown, 1000);
 
-  // Musik
+  // Musik & Buka Undangan (Cover Gate)
   const audio = $("backgroundMusic");
   const musicBtn = $("musicToggle");
-  if (audio && cfg.music) audio.src = cfg.music;
+  const coverEl = $("cover");
+  const invitationContent = $("invitationContent");
+
+  if (audio && cfg.music) {
+    audio.src = cfg.music;
+  }
 
   musicBtn?.addEventListener("click", async () => {
     try {
@@ -146,16 +157,29 @@
   });
 
   $("openInvitation")?.addEventListener("click", () => {
-    $("intro")?.scrollIntoView({ behavior: "smooth" });
-    if (audio?.paused) {
+    // 1. Buka kunci scroll dan tampilkan isi undangan
+    document.body.classList.remove("locked");
+    coverEl?.classList.add("is-opened");
+    invitationContent?.classList.add("is-visible");
+    window.scrollTo(0, 0);
+
+    // 2. Putar musik secara otomatis
+    if (audio) {
       audio.play().then(() => {
         setText("musicIcon", "Ⅱ");
         setText("musicLabel", "Jeda Musik");
-      }).catch(() => {});
+      }).catch((err) => {
+        console.warn("Musik gagal diputar otomatis:", err);
+      });
     }
+
+    // 3. Sembunyikan sampul sepenuhnya setelah animasi geser selesai (850ms)
+    setTimeout(() => {
+      if (coverEl) coverEl.style.display = "none";
+    }, 850);
   });
 
-// RSVP dan Buku Tamu (Terhubung ke Google Sheets)
+  // RSVP dan Buku Tamu (Terhubung ke Google Sheets)
   const rsvpForm = $("rsvpForm");
   const wishList = $("wishList");
   const wishCount = $("wishCount");
@@ -279,7 +303,7 @@
     }
   });
 
-// Generator link tamu (Hanya muncul jika URL mengandung ?admin=true)
+  // Generator link tamu (Hanya muncul jika URL mengandung ?admin=true)
   if (params.get("admin") === "true") {
     const adminButton = document.createElement("button");
     adminButton.className = "admin-generator";
@@ -331,6 +355,7 @@
       document.body.appendChild(box);
     });
   }
+
   // Reveal on scroll
   const revealElements = document.querySelectorAll(".reveal, .profile-card");
   if ("IntersectionObserver" in window) {
