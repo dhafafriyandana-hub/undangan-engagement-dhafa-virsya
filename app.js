@@ -267,26 +267,6 @@
 
   loadWishes();
 
-    const phone = String(cfg.rsvpWhatsApp || "").replace(/\D/g, "");
-    const body = `Assalamu'alaikum.\n\nSaya ${name} ingin mengonfirmasi undangan ${one.firstName || ""} & ${two.firstName || ""}.\nKehadiran: ${status}\nUcapan: ${message}`;
-    rsvpForm.reset();
-    if (guest !== "Tamu Undangan" && $("rsvpName")) $("rsvpName").value = guest;
-
-    if (phone.length >= 8) {
-      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(body)}`, "_blank", "noopener,noreferrer");
-    } else {
-      alert("Ucapan diproses, tetapi nomor WhatsApp belum diatur di config.js.");
-    }
-
-    if (!saved) {
-      alert("Browser tidak mengizinkan penyimpanan lokal. Ucapan mungkin tidak tersimpan setelah halaman ditutup.");
-    }
-
-    document.querySelector(".guestbook-card")?.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-
-  renderGuestBook();
-
   // Salin rekening
   $("copyAccount")?.addEventListener("click", async () => {
     const account = String(cfg.gift?.account || "");
