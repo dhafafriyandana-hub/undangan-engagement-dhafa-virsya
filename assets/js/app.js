@@ -155,22 +155,25 @@
     }
   });
 
-  // RSVP dan Buku Tamu
+ // RSVP dan Buku Tamu (Terhubung ke Google Sheets)
   const rsvpForm = $("rsvpForm");
   const wishList = $("wishList");
   const wishCount = $("wishCount");
+  const rsvpSubmit = $("rsvpSubmit");
+  const wishesApi = cfg.wishesApiUrl || "";
   let wishes = [];
 
-  try {
-    wishes = JSON.parse(localStorage.getItem("engagementWishes") || "[]");
-    if (!Array.isArray(wishes)) wishes = [];
-  } catch {
-    wishes = [];
-  }
-
-  function renderGuestBook() {
+  function renderGuestBook(isLoading = false) {
     if (!wishList || !wishCount) return;
     wishList.innerHTML = "";
+
+    if (isLoading) {
+      const loading = document.createElement("div");
+      loading.className = "empty-wishes";
+      loading.textContent = "Memuat ucapan tamu...";
+      wishList.appendChild(loading);
+      return;
+    }
 
     if (!wishes.length) {
       const empty = document.createElement("div");
@@ -195,7 +198,22 @@
     wishCount.textContent = `${wishes.length} Ucapan`;
   }
 
-  rsvpForm?.addEventListener("submit", (e) => {
+  async function loadWishes() {
+    if (!wishesApi) return;
+    renderGuestBook(true);
+    try {
+      const response = await fetch(wishesApi);
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        wishes = data;
+      }
+    } catch (err) {
+      console.error("Gagal memuat ucapan:", err);
+    }
+    renderGuestBook(false);
+  }
+
+  rsvpForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = $("rsvpName")?.value.trim() || "";
     const status = $("rsvpStatus")?.value || "";
@@ -205,16 +223,35 @@
       return;
     }
 
-    wishes.unshift({ name, status, message, date: new Date().toISOString() });
-
-    let saved = true;
-    try {
-      localStorage.setItem("engagementWishes", JSON.stringify(wishes));
-    } catch {
-      saved = false;
+    if (rsvpSubmit) {
+      rsvpSubmit.disabled = true;
+      rsvpSubmit.textContent = "Mengirim ucapan...";
     }
 
-    renderGuestBook();
+    const newWish = { name, status, message, date: new Date().toISOString() };
+
+    // Kirim ke Google Sheets
+    if (wishesApi) {
+      try {
+        await fetch(wishesApi, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: JSON.stringify(newWish)
+        });
+      } catch (err) {
+        console.error("Gagal mengirim ke server:", err);
+      }
+    }
+
+    // Langsung tampilkan di layar tanpa menunggu refresh
+    wishes.unshift(newWish);
+    renderGuestBook(false);
+
+    if (rsvpSubmit) {
+      rsvpSubmit.disabled = false;
+      rsvpSubmit.textContent = "♡ Kirim Ucapan";
+    }
 
     const phone = String(cfg.rsvpWhatsApp || "").replace(/\D/g, "");
     const body = `Assalamu'alaikum.\n\nSaya ${name} ingin mengonfirmasi undangan ${one.firstName || ""} & ${two.firstName || ""}.\nKehadiran: ${status}\nUcapan: ${message}`;
@@ -223,19 +260,13 @@
 
     if (phone.length >= 8) {
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(body)}`, "_blank", "noopener,noreferrer");
-    } else {
-      alert("Ucapan diproses, tetapi nomor WhatsApp belum diatur di config.js.");
-    }
-
-    if (!saved) {
-      alert("Browser tidak mengizinkan penyimpanan lokal. Ucapan mungkin tidak tersimpan setelah halaman ditutup.");
     }
 
     document.querySelector(".guestbook-card")?.scrollIntoView({ behavior: "smooth", block: "center" });
   });
 
-  renderGuestBook();
-
+  loadWishes();
+  
   // Salin rekening
   $("copyAccount")?.addEventListener("click", async () => {
     const account = String(cfg.gift?.account || "");
