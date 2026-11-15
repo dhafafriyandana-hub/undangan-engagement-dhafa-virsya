@@ -43,6 +43,7 @@ window.INVITATION = {
   ],
   music: "assets/music/backsound-undangan.mp3",
   rsvpWhatsApp: "+628978504588",
+  wishesApiUrl: "https://script.google.com/macros/s/AKfycbwqGXavx2D9j9z-mhY_5KznrTxWcKKwcuNqwQPETnecdBxmQMbJcZ7jvAULkoJAkFYJ/exec",
   gift: {
     bank: "BANK MANDIRI",
     account: "1190009807981",
