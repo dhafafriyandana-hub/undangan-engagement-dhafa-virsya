@@ -31,7 +31,7 @@ window.INVITATION = {
     venue: "Warung Zamzam Halim Raya",
     address: "Jl. Komodor Halim Perdana Kusuma No.28, Jakarta Timur, DKI Jakarta 13610",
     note: "Akses utama dari arah Bandara Halim Perdana Kusuma.",
-    mapQuery: "-6.257574,106.883386"
+    mapQuery: "-6.266107089698416, 106.88148999904745"
   },
   gallery: [
     "assets/images/foto-1.jpeg",
