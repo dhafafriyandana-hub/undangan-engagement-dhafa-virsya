@@ -356,7 +356,7 @@
     });
   }
 
-  // Reveal on scroll
+  // Reveal on scroll (Memunculkan teks & ornamen.jpg di setiap section saat di-scroll)
   const revealElements = document.querySelectorAll(".reveal, .profile-card");
   if ("IntersectionObserver" in window) {
     const observer = new IntersectionObserver((entries) => {
